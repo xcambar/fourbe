@@ -1,0 +1,28 @@
+{
+  "name": "fourbe",
+  "version": "0.0.0",
+  "description": "A mocking library for Node and Browserify",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./tests/tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/xcambar/fourbe.git"
+  },
+  "keywords": [
+    "browserify",
+    "node",
+    "mock"
+  ],
+  "author": "Xavier Cambar <xcambar@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xcambar/fourbe/issues"
+  },
+  "homepage": "https://github.com/xcambar/fourbe",
+  "dependencies": {
+    "falafel": "~0.3.1",
+    "estraverse": "~1.5.1"
+  }
+}
