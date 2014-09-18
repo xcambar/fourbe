@@ -1,3 +1,5 @@
+__Work in progress: Not even functional. Don't use. PRs welcome though :)__
+
 #Fourbe
 
     Fourbe: French for "sneaky"
@@ -10,47 +12,52 @@ module by another one, for the sake of a true isolated testing.
 
 ## Install
 
-``sh
+```sh
 npm install --save-dev fourbe
-``
+```
 
 ## Usage
 
 ### In your tests
 
 #### src/index.js
-``js
+
+```js
 var ext = require('./lib/foo.js');
 module.exports = function () {
   return ext;
 };
-``
+```
 
 #### src/lib/foo.js
-``js
+
+```js
 module.exports = {
   yay: "I'm foo"
 };
+```
 
 #### test/index.js
-``js
-var fourbe = require('fourbe');
-var \_require = fourbe(require);
 
-\_require.with({
+```js
+var fourbe = require('fourbe');
+var _require = fourbe(require);
+
+_require.with({
   '../src/lib/foo': './mocks/foo'
 })
 
-var mod = \_require.require('../src');
+var mod = _require.require('../src');
 
 assert.strictEqual(mod(), require('./mocks/foo')); // true, of course
 assert.deepEqual(mod(), { nope: "I'm bar" }); // same, in other words
-``
+```
 
 #### test/mocks/foo.js
-``js
+
+```js
 module.exports = { nope: "I'm bar" };
-``
+```
 
 ### In Browserify
 
@@ -58,14 +65,17 @@ TODO
 
 ## Motivation
 
-The best mocking library so far in Node-land is [mockery](), but alas, it doesn't
-export properly to the browser with Browserify.
+The best mocking library so far in Node-land is
+[mockery](https://github.com/mfncooper/mockery), but alas, it doesn't export
+properly to the browser with Browserify.
 
 Two good alternatives exist:
-* [rewire](), but it only mocks private vars. It's a decent workaround for
-    dependency mocking.
-* [proxyquire]() and [proxyquireify]() (its Browserified fork) mock `require`
-    calls, but I couldn't get `proxyquireify` to work properly.
+* [rewire](https://github.com/jhnns/rewire), but it only mocks private vars.
+  It's a decent workaround for dependency mocking though.
+* [proxyquire](https://github.com/thlorenz/proxyquire) and
+  [proxyquireify](https://github.com/thlorenz/proxyquireify)
+  (its Browserified fork) mock `require` calls, but I couldn't get
+  `proxyquireify` to work properly.
 
 The main pain point for these 2 libraries is that they kill code coverage
 because the original module is nonetheless `require`'d.
